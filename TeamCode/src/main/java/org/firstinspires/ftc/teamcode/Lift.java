@@ -25,12 +25,7 @@ public class Lift{
 
         motorL=hardwareMap.get(DcMotorEx.class,"leftLift");
 
-        motorL
-
-
-
-                .setDirection(DcMotorSimple.Direction.REVERSE);
-
+        motorL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         g2=linearOpMode.gamepad2;
