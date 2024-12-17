@@ -25,19 +25,20 @@ public class Lift{
 
         motorL=hardwareMap.get(DcMotorEx.class,"leftLift");
 
-        motorL.setDirection(DcMotorSimple.Direction.REVERSE);
+        //motorL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        g2=linearOpMode.gamepad2;
+        g2=linearOpMode.gamepad1
+        ;
     }
     public void Control() {
         if (g2.dpad_up&&(motorL.getTargetPosition() < maxRot && motorL.getCurrentPosition() < maxRot)) {
-            motorL.setPower(1);
-            motorR.setPower(1);
+            motorL.setPower(-1);
+            motorR.setPower(-1);
         }
         else if (g2.dpad_down&&(motorL.getTargetPosition() > minRot && motorL.getCurrentPosition() > minRot)) {
-            motorR.setPower(-1);
-            motorL.setPower(-1);
+            motorR.setPower(1);
+            motorL.setPower(1);
         }
         else {
             motorL.setPower(0);

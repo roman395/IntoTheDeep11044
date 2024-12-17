@@ -21,10 +21,12 @@ public class TeleOp extends LinearOpMode {
             p.Control();
             i.Control();
             l.Control();
-
+telemetry.addData("left",l.motorL.getCurrentPosition());
+telemetry.addData("right",l.motorR.getCurrentPosition());
             telemetry.update();
 
         }
 
     }
 }
+

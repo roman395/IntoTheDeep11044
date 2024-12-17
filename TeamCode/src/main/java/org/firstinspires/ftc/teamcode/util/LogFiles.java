@@ -16,10 +16,10 @@ import com.qualcomm.robotcore.util.WebHandlerManager;
 
 import org.firstinspires.ftc.ftccommon.external.WebHandlerRegistrar;
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
-import org.firstinspires.ftc.teamcode.DriveConstants;
-import org.firstinspires.ftc.teamcode.SampleMecanumDrive;
-import org.firstinspires.ftc.teamcode.SampleTankDrive;
-import org.firstinspires.ftc.teamcode.StandardTrackingWheelLocalizer;
+import org.firstinspires.ftc.teamcode.opmode.DriveConstants;
+import org.firstinspires.ftc.teamcode.opmode.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.opmode.SampleTankDrive;
+import org.firstinspires.ftc.teamcode.opmode.StandardTrackingWheelLocalizer;
 
 import java.io.File;
 import java.io.FileInputStream;
