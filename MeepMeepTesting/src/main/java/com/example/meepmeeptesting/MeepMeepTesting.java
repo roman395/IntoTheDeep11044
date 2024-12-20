@@ -20,17 +20,34 @@ public class MeepMeepTesting {
                 // Option: Set theme. Default = ColorSchemeRedDark()
                 .setColorScheme(new ColorSchemeRedDark())
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(0, 0, 0))
-
-                                .addDisplacementMarker(() -> {
-                                    /* Everything in the marker callback should be commented out */
-
-                                    // bot.shooter.shoot()
-                                    // bot.wobbleArm.lower()
+                        drive.trajectorySequenceBuilder(new Pose2d(12, 60, 0))
+                                .lineToLinearHeading(new Pose2d(8+24*2,55,Math.toRadians(45)))
+                                .addDisplacementMarker(()->{
                                 })
-                                .turn(Math.toRadians(90))
-                                .splineTo(new Vector2d(10, 15), 0)
-                                .turn(Math.toRadians(90))
+                                .waitSeconds(1)
+                                .lineToLinearHeading(new Pose2d(8+24*2,40,Math.toRadians(-90)))
+                                .addDisplacementMarker(()->{
+                                })
+                                .waitSeconds(1)
+                                .lineToLinearHeading(new Pose2d(8+24*2,55,Math.toRadians(45)))
+                                .addDisplacementMarker(()->{
+                                })
+                                .waitSeconds(1)
+                                .lineToLinearHeading(new Pose2d(8+24*2,40,Math.toRadians(-90-45)))
+                                .addDisplacementMarker(()->{
+                                })
+                                .waitSeconds(1)
+                                .lineToLinearHeading(new Pose2d(8+24*2,55,Math.toRadians(45)))
+                                .addDisplacementMarker(()->{
+                                })
+                                .waitSeconds(1)   
+                                .lineToLinearHeading(new Pose2d(8+24*2,40,Math.toRadians(-90+45)))
+                                .waitSeconds(1)
+                                .lineToLinearHeading(new Pose2d(8+24*2,55,Math.toRadians(45)))
+                                .addDisplacementMarker(()->{
+                                })
+                                .waitSeconds(1)
+                                .lineToLinearHeading(new Pose2d(24,12,Math.toRadians(0)))
                                 .build()
                 );
 
