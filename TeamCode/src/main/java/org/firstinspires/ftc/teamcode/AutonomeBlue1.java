@@ -9,38 +9,40 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.opmode.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 @Autonomous
 @Config
 public class AutonomeBlue1 extends LinearOpMode {
-    Mecanum mec;
+    SampleMecanumDrive mec;
     ElapsedTime t;
-
     @Override
     public void runOpMode() throws InterruptedException {
-        mec=new Mecanum(this);
-t=new ElapsedTime();
-
-
-
-
-
+        mec=new SampleMecanumDrive(hardwareMap);
+        t=new ElapsedTime();
         waitForStart();
         t.reset();
-        while(t.seconds()<1){
-            mec.BL.setPower(0.5);
-            mec.FL.setPower(0.5);
-            mec.FR.setPower(0.5);
-            mec.BR.setPower(0.5);
+        while (t.milliseconds()<1000){
+            mec.leftFront.setPower(-1);
+            mec.leftRear.setPower(-1);
+            mec.rightRear.setPower(-1);
+            mec.rightFront.setPower(-1);
         }
-        mec.BL.setPower(0);
-        mec.FL.setPower(0);
-        mec.FR.setPower(0);
-        mec.BR.setPower(0);
-
-
-
-
+        mec.leftFront.setPower(0);
+        mec.leftRear.setPower(0);
+        mec.rightRear.setPower(0);
+        mec.rightFront.setPower(0);
+        t.reset();
+        while (t.milliseconds()<3100){
+            mec.leftFront.setPower(0.5);
+            mec.leftRear.setPower(0.5);
+            mec.rightRear.setPower(0.5);
+            mec.rightFront.setPower(0.5);
+        }
+        mec.leftFront.setPower(0);
+        mec.leftRear.setPower(0);
+        mec.rightRear.setPower(0);
+        mec.rightFront.setPower(0);
 
     }
 }

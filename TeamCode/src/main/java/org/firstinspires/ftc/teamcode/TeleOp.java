@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;  
 
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp
@@ -12,18 +12,18 @@ public class TeleOp extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         mecanum=new Mecanum(this);
-        //i=new Intake(this);
-        //l=new Lift(this);
-        //p=new Perekid(this);
+        i=new Intake(this);
+        l=new Lift(this);
+        p=new Perekid(this);
         waitForStart();
         while (opModeIsActive()) {
             mecanum.TeleOp();
-            /*p.Control();
+            p.Control();
             i.Control();
             l.Control();
-
-             */
-
+            telemetry.addData("PositionL",l.motorL.getCurrentPosition());
+            telemetry.addData("PositionR",l.motorR.getCurrentPosition());
+            telemetry.update();
         }
 
     }

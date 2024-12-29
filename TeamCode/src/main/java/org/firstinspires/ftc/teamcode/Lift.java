@@ -22,21 +22,21 @@ public class Lift{
         this.linearOpMode=linearOpMode;
         hardwareMap=linearOpMode.hardwareMap;
         motorR=hardwareMap.get(DcMotorEx.class,"rightLift");
-
         motorL=hardwareMap.get(DcMotorEx.class,"leftLift");
-
-        //motorL.setDirection(DcMotorSimple.Direction.REVERSE);
         motorR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        g2=linearOpMode.gamepad1
-        ;
+        motorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
+        g2=linearOpMode.gamepad1;
     }
+
     public void Control() {
-        if (g2.dpad_up&&(motorL.getTargetPosition() < maxRot && motorL.getCurrentPosition() < maxRot)) {
+
+        if (g2.dpad_up) {
             motorL.setPower(-1);
             motorR.setPower(-1);
         }
-        else if (g2.dpad_down&&(motorL.getTargetPosition() > minRot && motorL.getCurrentPosition() > minRot)) {
+        else if (g2.dpad_down) {
             motorR.setPower(1);
             motorL.setPower(1);
         }

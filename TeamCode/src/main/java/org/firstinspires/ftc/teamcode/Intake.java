@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.LED;
 @TeleOp
 public class Intake{
     CRServo s;
-    Perekid p;
+
     DigitalChannel fish;
     LED l;
     LinearOpMode linearOpMode;
@@ -21,17 +21,25 @@ public class Intake{
         this.linearOpMode=linearOpMode;
         hardwareMap=linearOpMode.hardwareMap;
         s=hardwareMap.get(CRServo.class,"Intake");
-        p=new Perekid(linearOpMode);
+
         //fish=hardwareMap.get(DigitalChannel.class,"FlyingFish");
         //l=hardwareMap.get(LED.class,"lamp");
 
-        gamepad2=linearOpMode.gamepad2;
+        gamepad2=linearOpMode.gamepad1;
+    }
+    //1 = input
+    //-1 = output
+    //0 = stop
+    public void Autonom(int input){
+        if(input==1) s.setPower(1);
+        else if (input==-1) s.setPower(-1);
+        else s.setPower(0);
     }
     public void Control(){
-        if(gamepad2.right_trigger>=0.5){
+        if(gamepad2.left_bumper){
               s.setPower(1);
         }
-        else if (gamepad2.left_trigger>=0.5) {
+        else if (gamepad2.right_bumper) {
               s.setPower(-1);
           }
 
