@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @Autonomous
 @Config
-public class AutonomeRed1 extends LinearOpMode {
+public class Venom extends LinearOpMode {
     SampleMecanumDrive mec;
     Perekid p;
     Lift l;
@@ -26,13 +26,13 @@ public class AutonomeRed1 extends LinearOpMode {
         l=new Lift(this);
         p=new Perekid(this);
 
-        TrajectorySequence e = mec.trajectorySequenceBuilder(new Pose2d(-12, 60, Math.toRadians(-90)))
-                .forward(24)
+        TrajectorySequence e = mec.trajectorySequenceBuilder(new Pose2d(12, 60, Math.toRadians(-90)))
+                .forward(26)
                 .addTemporalMarker(1.5,()->{
                     l.Autonom(l.minRot);
                 })
                 .waitSeconds(0.5)
-                .back(18)
+                .back(20)
                 .addTemporalMarker(2.2,()->{
                     i.Autonom(-1);
                 })
@@ -41,12 +41,31 @@ public class AutonomeRed1 extends LinearOpMode {
                     i.Autonom(0);
                 })
                 .turn(Math.toRadians(90))
-                .splineToConstantHeading(new Vector2d(36-12,20),Math.toRadians(105))
+                .splineToConstantHeading(new Vector2d(36-17+12,20-2),Math.toRadians(105))
                 .addTemporalMarker(4,()->{
                     p.Autonom(true);
                     i.Autonom(1);
                 })
-
+                .waitSeconds(1)
+                .addTemporalMarker(8,()->{
+                    p.Autonom(false);
+                })
+                .strafeLeft(24*1.3)
+                .turn(Math.toRadians(40))
+                .forward(7.5)
+                .addTemporalMarker(12,()->{
+                    l.Autonom(l.maxRot);
+                })
+                .waitSeconds(4)
+                .addTemporalMarker(18,()->{
+                    i.Autonom(-1);
+                })
+                .waitSeconds(2)
+                .addTemporalMarker(28,()->{
+                    i.Autonom(0);
+                    l.Autonom(l.minRot);
+                })
+                .waitSeconds(2)
                 .build();
 
 
@@ -57,7 +76,7 @@ public class AutonomeRed1 extends LinearOpMode {
         mec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         mec.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         mec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        mec.setPoseEstimate(new Pose2d(-12,60,Math.toRadians(-90)));
+        mec.setPoseEstimate(new Pose2d(12,60,Math.toRadians(-90)));
         l.Autonom(l.specScoreRot);
         p.Autonom(false);
 

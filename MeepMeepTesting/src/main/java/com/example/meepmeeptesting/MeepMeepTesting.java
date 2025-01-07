@@ -21,14 +21,25 @@ public class MeepMeepTesting {
                 .setColorScheme(new ColorSchemeRedDark())
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(12, 60, Math.toRadians(-90)))
-                                .forward(21)
+                                .forward(24)
                                 .addTemporalMarker(1.5,()->{
 
                                 })
                                 .waitSeconds(0.5)
-                                .back(22)
+                                .back(18)
+                                .addTemporalMarker(2.2,()->{
+
+                                })
+                                .addTemporalMarker(3,()->{
+
+                                })
                                 .turn(Math.toRadians(90))
-                                .splineToConstantHeading(new Vector2d(38,24),Math.toRadians(100))
+                                .splineToConstantHeading(new Vector2d(36-12,20),Math.toRadians(105))
+                                .addTemporalMarker(4,()->{
+
+                                })
+                            .lineToLinearHeading(new Pose2d(56,55,Math.toRadians(45)))
+
                                 .build()
                 );
 
