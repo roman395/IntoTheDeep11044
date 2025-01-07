@@ -28,27 +28,31 @@ public class Perekid {
 
     public void Autonom(boolean down) {
         if (!down) {
-            s1.setPosition(0.48);
-            s2.setPosition(0.48);
+            s1.setPosition(0.45);
+            s2.setPosition(0.45);
         } else {
-            s1.setPosition(0.878);
-            s2.setPosition(0.878);
+            s1.setPosition(0.92);
+            s2.setPosition(0.92);
         }
     }
 
     public void Control() {
 
         if (g2.triangle) {
-            s1.setPosition(0.48);
-            s2.setPosition(0.48);
+            s1.setPosition(0.45);
+            s2.setPosition(0.45);
         }
         else if (g2.circle){
-            s1.setPosition(0.8);
-            s2.setPosition(0.8  );
+            s1.setPosition(0.88);
+            s2.setPosition(0.88);
         }
         else if (g2.cross) {
-            s1.setPosition(0.878);
-            s2.setPosition(0.878);
+            s1.setPosition(0.934);
+            s2.setPosition(0.934);
+        } else if (g2.square) {
+            s1.setPosition(0.25);
+            s2.setPosition(0.25);
+
         }
     }
 }

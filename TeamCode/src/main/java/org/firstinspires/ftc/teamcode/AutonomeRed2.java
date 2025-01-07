@@ -27,9 +27,11 @@ public class AutonomeRed2 extends LinearOpMode {
 
         TrajectorySequence e = mec.trajectorySequenceBuilder(new Pose2d(-12, -58, Math.toRadians(180)))
                 .turn(Math.toRadians(90))
-                .addDisplacementMarker(()->{
-                    p.Autonom(false);
+
+                .addTemporalMarker(2,()->{
+                   p.Autonom(true);
                 })
+                .waitSeconds(5)
                 .build();
 
 

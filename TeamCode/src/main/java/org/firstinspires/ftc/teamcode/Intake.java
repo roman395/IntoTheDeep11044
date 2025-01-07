@@ -25,22 +25,22 @@ public class Intake{
         //fish=hardwareMap.get(DigitalChannel.class,"FlyingFish");
         //l=hardwareMap.get(LED.class,"lamp");
 
-        gamepad2=linearOpMode.gamepad2;
+        gamepad2=linearOpMode.gamepad1;
     }
     //0-off
     //1-in
     //-1-out
     public void Autonom(int i){
-        if(i==1) s.setPower(1);
-        else if (i==-1) s.setPower(-1);
+        if(i==-1) s.setPower(1);
+        else if (i==1) s.setPower(-1);
         else s.setPower(0);
 
     }
     public void Control(){
-        if(gamepad2.right_trigger>=0.5){
+        if(gamepad2.left_bumper){
               s.setPower(1);
         }
-        else if (gamepad2.left_trigger>=0.5) {
+        else if (gamepad2.right_bumper) {
               s.setPower(-1);
           }
 

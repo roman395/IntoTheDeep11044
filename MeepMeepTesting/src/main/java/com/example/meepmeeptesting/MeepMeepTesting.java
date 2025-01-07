@@ -1,6 +1,7 @@
 package com.example.meepmeeptesting;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
 
 import org.rowlandhall.meepmeep.MeepMeep;
 import org.rowlandhall.meepmeep.core.colorscheme.scheme.ColorSchemeRedDark;
@@ -19,34 +20,15 @@ public class MeepMeepTesting {
                 // Option: Set theme. Default = ColorSchemeRedDark()
                 .setColorScheme(new ColorSchemeRedDark())
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(12, 60, Math.toRadians(0)))
-                                .lineToLinearHeading(new Pose2d(8+24*2,55,Math.toRadians(45)))
-                                .addDisplacementMarker(()->{
+                        drive.trajectorySequenceBuilder(new Pose2d(12, 60, Math.toRadians(-90)))
+                                .forward(21)
+                                .addTemporalMarker(1.5,()->{
+
                                 })
-                                .waitSeconds(1)
-                                .lineToLinearHeading(new Pose2d(8+24*2,40,Math.toRadians(-90)))
-                                .addDisplacementMarker(()->{
-                                })
-                                .waitSeconds(1)
-                                .lineToLinearHeading(new Pose2d(8+24*2,55,Math.toRadians(45)))
-                                .addDisplacementMarker(()->{
-                                })
-                                .waitSeconds(1)
-                                .lineToLinearHeading(new Pose2d(8+24*2,40,Math.toRadians(-90-45)))
-                                .addDisplacementMarker(()->{
-                                })
-                                .waitSeconds(1)
-                                .lineToLinearHeading(new Pose2d(8+24*2,55,Math.toRadians(45)))
-                                .addDisplacementMarker(()->{
-                                })
-                                .waitSeconds(1)   
-                                .lineToLinearHeading(new Pose2d(8+24*2,40,Math.toRadians(-90+45)))
-                                .waitSeconds(1)
-                                .lineToLinearHeading(new Pose2d(8+24*2,55,Math.toRadians(45)))
-                                .addDisplacementMarker(()->{
-                                })
-                                .waitSeconds(1)
-                                .lineToLinearHeading(new Pose2d(24,12,Math.toRadians(0)))
+                                .waitSeconds(0.5)
+                                .back(22)
+                                .turn(Math.toRadians(90))
+                                .splineToConstantHeading(new Vector2d(38,24),Math.toRadians(100))
                                 .build()
                 );
 

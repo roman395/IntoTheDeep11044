@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -25,18 +26,22 @@ public class AutonomeRed1 extends LinearOpMode {
         l=new Lift(this);
         p=new Perekid(this);
 
-        TrajectorySequence e = mec.trajectorySequenceBuilder(new Pose2d(12, 60, Math.toRadians(0)))
-                .addDisplacementMarker(()->{
-                    p.Autonom(false);
-                    l.Autonom(l.maxRot);
+        TrajectorySequence e = mec.trajectorySequenceBuilder(new Pose2d(-12, 60, Math.toRadians(-90)))
+                .forward(21)
+                .addTemporalMarker(1.5,()->{
+                    l.Autonom(l.minRot);
                 })
-                .lineToLinearHeading(new Pose2d(24*2,55-12,Math.toRadians(45)))
-                .waitSeconds(1)
-                .addDisplacementMarker(()->{
+                .waitSeconds(0.5)
+                .back(21)
+                .addTemporalMarker(2.2,()->{
                     i.Autonom(-1);
                 })
-                .waitSeconds(2)
-                .lineToLinearHeading(new Pose2d(24,12,Math.toRadians(0)))
+                .addTemporalMarker(3,()->{
+                    p.Autonom(false);
+                    i.Autonom(0);
+                })
+                .turn(Math.toRadians(90))
+                .splineToConstantHeading(new Vector2d(38-12,20),Math.toRadians(100))
                 .build();
 
 
@@ -45,8 +50,11 @@ public class AutonomeRed1 extends LinearOpMode {
 
         waitForStart();
         mec.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        mec.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         mec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        mec.setPoseEstimate(new Pose2d(12,60,Math.toRadians(0)));
+        mec.setPoseEstimate(new Pose2d(-12,60,Math.toRadians(-90)));
+        l.Autonom(l.specScoreRot);
+        p.Autonom(false);
         mec.followTrajectorySequence(e);
 
 
