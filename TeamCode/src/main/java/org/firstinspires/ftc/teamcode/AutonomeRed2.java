@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -15,26 +14,22 @@ import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 @Config
 public class AutonomeRed2 extends LinearOpMode {
     SampleMecanumDrive mec;
-
+    Perekid p;
+    Lift l;
+    Intake i;
 
     @Override
     public void runOpMode() throws InterruptedException {
         mec=new SampleMecanumDrive(hardwareMap);
-
+        i=new Intake(this);
+        l=new Lift(this);
+        p=new Perekid(this);
 
         TrajectorySequence e = mec.trajectorySequenceBuilder(new Pose2d(-12, -58, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(-48,-48,Math.toRadians(25+180)))
-
-                .waitSeconds(1)
-
-                .splineToLinearHeading(new Pose2d(-36,-8,Math.toRadians(180)),Math.toRadians(180))
-
-                .waitSeconds(0.5)
-                .splineTo(new Vector2d(-48,-40),Math.toRadians(25+180))
-
-                .waitSeconds(1)
-                .lineToLinearHeading(new Pose2d(-40,12,Math.toRadians(180)))
-
+                .turn(Math.toRadians(90))
+                .addDisplacementMarker(()->{
+                    p.Autonom(false);
+                })
                 .build();
 
 
