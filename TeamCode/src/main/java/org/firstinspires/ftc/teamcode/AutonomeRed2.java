@@ -40,7 +40,7 @@ public class AutonomeRed2 extends LinearOpMode {
         mec.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         mec.setPoseEstimate(new Pose2d(-12,-58,Math.toRadians(180)));
         mec.followTrajectorySequence(e);
-
+//fcjcjfjgjgjtfttf
 
 
 
