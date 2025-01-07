@@ -27,12 +27,12 @@ public class AutonomeRed1 extends LinearOpMode {
         p=new Perekid(this);
 
         TrajectorySequence e = mec.trajectorySequenceBuilder(new Pose2d(-12, 60, Math.toRadians(-90)))
-                .forward(21)
+                .forward(24)
                 .addTemporalMarker(1.5,()->{
                     l.Autonom(l.minRot);
                 })
                 .waitSeconds(0.5)
-                .back(21)
+                .back(18)
                 .addTemporalMarker(2.2,()->{
                     i.Autonom(-1);
                 })
@@ -41,7 +41,12 @@ public class AutonomeRed1 extends LinearOpMode {
                     i.Autonom(0);
                 })
                 .turn(Math.toRadians(90))
-                .splineToConstantHeading(new Vector2d(38-12,20),Math.toRadians(100))
+                .splineToConstantHeading(new Vector2d(36-12,20),Math.toRadians(105))
+                .addTemporalMarker(4,()->{
+                    p.Autonom(true);
+                    i.Autonom(1);
+                })
+
                 .build();
 
 
@@ -55,8 +60,10 @@ public class AutonomeRed1 extends LinearOpMode {
         mec.setPoseEstimate(new Pose2d(-12,60,Math.toRadians(-90)));
         l.Autonom(l.specScoreRot);
         p.Autonom(false);
-        mec.followTrajectorySequence(e);
 
+        mec.followTrajectorySequence(e);
+        p.Autonom(true);
+        i.Autonom(1);
 
 
 

@@ -31,8 +31,8 @@ public class Perekid {
             s1.setPosition(0.45);
             s2.setPosition(0.45);
         } else {
-            s1.setPosition(0.92);
-            s2.setPosition(0.92);
+            s1.setPosition(0.9);
+            s2.setPosition(0.9);
         }
     }
 
