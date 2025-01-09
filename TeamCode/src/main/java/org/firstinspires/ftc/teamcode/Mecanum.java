@@ -37,7 +37,8 @@ public Mecanum(LinearOpMode linearOpMode){
     BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     FL.setDirection(DcMotorSimple.Direction.REVERSE);
-    BL.setDirection(DcMotorSimple.Direction.REVERSE);
+    BR.setDirection(DcMotorSimple.Direction.REVERSE);
+    BL.setDirection(DcMotorSimple.Direction.REVERSE  );
     imu = hardwareMap.get(IMU.class, "imu");
     // Adjust the orientation parameters to match your robot
     IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
