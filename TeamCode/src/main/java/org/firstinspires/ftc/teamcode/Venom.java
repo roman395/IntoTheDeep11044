@@ -40,32 +40,7 @@ public class Venom extends LinearOpMode {
                     p.Autonom(false);
                     i.Autonom(0);
                 })
-                .turn(Math.toRadians(90))
-                .splineToConstantHeading(new Vector2d(36-17+12,20-2),Math.toRadians(105))
-                .addTemporalMarker(4,()->{
-                    p.Autonom(true);
-                    i.Autonom(1);
-                })
-                .waitSeconds(1)
-                .addTemporalMarker(8,()->{
-                    p.Autonom(false);
-                })
-                .strafeLeft(24*1.3)
-                .turn(Math.toRadians(40))
-                .forward(7.5)
-                .addTemporalMarker(12,()->{
-                    l.Autonom(l.maxRot);
-                })
-                .waitSeconds(4)
-                .addTemporalMarker(18,()->{
-                    i.Autonom(-1);
-                })
-                .waitSeconds(2)
-                .addTemporalMarker(28,()->{
-                    i.Autonom(0);
-                    l.Autonom(l.minRot);
-                })
-                .waitSeconds(2)
+                .lineTo(new Vector2d(-52,55))
                 .build();
 
 

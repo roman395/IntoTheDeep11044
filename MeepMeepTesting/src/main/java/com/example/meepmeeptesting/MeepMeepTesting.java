@@ -33,13 +33,7 @@ public class MeepMeepTesting {
                                 .addTemporalMarker(3,()->{
 
                                 })
-                                .turn(Math.toRadians(90))
-                                .splineToConstantHeading(new Vector2d(36-12,20),Math.toRadians(105))
-                                .addTemporalMarker(4,()->{
-
-                                })
-                            .lineToLinearHeading(new Pose2d(56,55,Math.toRadians(45)))
-
+                                .lineTo(new Vector2d(-52,55))
                                 .build()
                 );
 
