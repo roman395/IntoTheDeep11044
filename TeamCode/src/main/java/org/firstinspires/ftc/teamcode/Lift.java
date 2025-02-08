@@ -11,10 +11,10 @@ public class Lift{
     public DcMotorEx motorL;
     public DcMotorEx motorR;
 
-    public int maxRot=4560;
-    public int specScoreRot=1950;
-    public int minRot=0;
-
+    public final static int maxRot=4560;
+    public final static int specScoreRot=1950;
+    public final static int minRot=0;
+    public static int currentRot;
     LinearOpMode linearOpMode;
     HardwareMap hardwareMap;
     Gamepad g2;
@@ -30,7 +30,8 @@ public class Lift{
         motorL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motorL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        g2=linearOpMode.gamepad1;
+        motorR.setVelocity(10000);
+        motorL.setVelocity(10000);
     }
     public  void Autonom(int range){
 
@@ -38,25 +39,26 @@ public class Lift{
         motorL.setTargetPosition(range);
         motorL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorR.setVelocity(2000);
-        motorL.setVelocity(2000);
+
 
     }
-    public void Control() {
-        motorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        if (g2.dpad_up) {
-            motorL.setPower(1);
-            motorR.setPower(1);
-        }
-        else if (g2.dpad_down) {
-            motorR.setPower(-1);
-            motorL.setPower(-1);
-        }
-        else {
-            motorL.setPower(0);
-            motorR.setPower(0);
-        }
+    public void Up() {
+        motorR.setTargetPosition(maxRot);
+        motorL.setTargetPosition(maxRot);
+        motorL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+    public void Down(){
+        motorR.setTargetPosition(minRot);
+        motorL.setTargetPosition(minRot);
+        motorL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+    public void Spec(){
+        motorR.setTargetPosition(specScoreRot);
+        motorL.setTargetPosition(specScoreRot);
+        motorL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
 }
