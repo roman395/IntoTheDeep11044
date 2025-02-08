@@ -26,13 +26,22 @@ public class Perekid {
 
     }
 
-    public void Autonom(boolean down) {
-        if (!down) {
+    public void Control(){
+        if(g2.triangle){
             s1.setPosition(0.45);
             s2.setPosition(0.45);
-        } else {
-            s1.setPosition(0.93);
-            s2.setPosition(0.93);
+        }
+        else if(g2.circle){
+            s1.setPosition(0.88);
+            s2.setPosition(0.88);
+        }
+        else if(g2.cross){
+            s1.setPosition(1);
+            s2.setPosition(1);
+        }
+        else if(g2.square){
+            s1.setPosition(0.25);
+            s2.setPosition(0.25);
         }
     }
     public void Control(){
@@ -54,16 +63,17 @@ public class Perekid {
         }
     }
     public void Take(){
-
+        s1.setPosition(0.87);
+        s2.setPosition(0.87);
     }
-    public void Move(){
 
-    }
     public void Sub(){
-
+        s1.setPosition(0.88);
+        s2.setPosition(0.88);
     }
     public void Score(){
-
+        s1.setPosition(0.45);
+        s2.setPosition(0.45);
     }
 
 }

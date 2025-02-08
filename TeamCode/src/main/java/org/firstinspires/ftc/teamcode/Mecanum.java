@@ -17,6 +17,7 @@ public class Mecanum {
     public DcMotor FR;
     public DcMotor BL;
     public DcMotor BR;
+    double rx;
     boolean operation = true;
     IMU imu;
 
@@ -51,12 +52,17 @@ public Mecanum(LinearOpMode linearOpMode){
                 if(gamepad1.back)
                     operation=!operation;
                 if(operation){
-                    double rx = (gamepad1.left_trigger - gamepad1.right_trigger);
+                    if(Lift.currentRot!=0)
+                         rx = (gamepad1.left_trigger - gamepad1.right_trigger)/Lift.currentRot;
+                    else
+                         rx = (gamepad1.left_trigger - gamepad1.right_trigger);
                     double y = gamepad1.left_stick_y; // Remember, Y stick value is reversed
                     double x = -gamepad1.left_stick_x;
-                    try {
+                    /*try {
                         rx = (gamepad1.left_trigger - gamepad1.right_trigger) / Lift.currentRot;
                     } catch (Exception ignored){}
+
+                     */
                     // This button choice was made so that it is hard to hit on accident,
                     // it can be freely changed based on preference.
                     // The equivalent button is start on Xbox-style controllers.
@@ -87,7 +93,7 @@ public Mecanum(LinearOpMode linearOpMode){
                     BR.setPower(backRightPower);
                 }
                 else{
-                    double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
+                    double y = gamepad1.left_stick_y; // Remember, Y stick value is reversed
                     double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
                     double rx = gamepad1.right_stick_x;
 
