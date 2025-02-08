@@ -35,6 +35,24 @@ public class Perekid {
             s2.setPosition(0.93);
         }
     }
+    public void Control(){
+        if(g2.triangle){
+            s1.setPosition(0.45);
+            s2.setPosition(0.45);
+        }
+        else if(g2.circle){
+            s1.setPosition(0.88);
+            s2.setPosition(0.88);
+        }
+        else if(g2.cross){
+            s1.setPosition(1);
+            s2.setPosition(1);
+        }
+        else if(g2.square){
+            s1.setPosition(0.25);
+            s2.setPosition(0.25);
+        }
+    }
     public void Take(){
 
     }
