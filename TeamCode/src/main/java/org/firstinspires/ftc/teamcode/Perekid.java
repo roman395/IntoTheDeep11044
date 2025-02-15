@@ -28,31 +28,12 @@ public class Perekid {
 
     public void Control(){
         if(g2.triangle){
+            //s1.setPosition(s1.getPosition()+0.01);
+            //s2.setPosition(s1.getPosition()+0.01);
             s1.setPosition(0.45);
             s2.setPosition(0.45);
         }
-        else if(g2.circle){
-            s1.setPosition(0.88);
-            s2.setPosition(0.88);
-        }
-        else if(g2.cross){
-            s1.setPosition(1);
-            s2.setPosition(1);
-        }
-        else if(g2.square){
-            s1.setPosition(0.25);
-            s2.setPosition(0.25);
-        }
-    }
-    public void Control(){
-        if(g2.triangle){
-            s1.setPosition(0.45);
-            s2.setPosition(0.45);
-        }
-        else if(g2.circle){
-            s1.setPosition(0.88);
-            s2.setPosition(0.88);
-        }
+
         else if(g2.cross){
             s1.setPosition(1);
             s2.setPosition(1);
@@ -63,8 +44,8 @@ public class Perekid {
         }
     }
     public void Take(){
-        s1.setPosition(0.87);
-        s2.setPosition(0.87);
+        s1.setPosition(0.99);
+        s2.setPosition(0.99);
     }
 
     public void Sub(){
@@ -72,8 +53,8 @@ public class Perekid {
         s2.setPosition(0.88);
     }
     public void Score(){
-        s1.setPosition(0.45);
-        s2.setPosition(0.45);
+        s1.setPosition(0.5);
+        s2.setPosition(0.5);
     }
 
 }

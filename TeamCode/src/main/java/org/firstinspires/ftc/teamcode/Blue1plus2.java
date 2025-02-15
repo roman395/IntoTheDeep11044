@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.opmode.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @Autonomous
-public class VenomBlue extends LinearOpMode {
+public class Blue1plus2 extends LinearOpMode {
     SampleMecanumDrive mec;
     Perekid p;
     Lift l;
@@ -27,7 +27,7 @@ public class VenomBlue extends LinearOpMode {
         p = new Perekid(this);
 
         TrajectorySequence e = mec.trajectorySequenceBuilder(new Pose2d(12, 60, Math.toRadians(-90)))
-                .forward(15)
+                .forward(14)
                 .addTemporalMarker(1, () -> {
                     l.Autonom(l.specScoreRot);
                 })
@@ -36,24 +36,24 @@ public class VenomBlue extends LinearOpMode {
                     l.Autonom(0);
                 })
                 .back(24)
-                .strafeLeft(24*2.55)
-                .addTemporalMarker(2.2, () -> {
-                    //i.Autonom(-1);
+                .strafeLeft(24*2.35)
+                .addTemporalMarker(1.5, () -> {
+                    //i.Autonom(1);
                 })
                 .addTemporalMarker(7, () -> {
                     p.Take();
                     i.Autonom(1);
                 })
                 .forward(25)
-                .addTemporalMarker(9,()->{
+                .addTemporalMarker(8.5,()->{
                     p.Score();
                     i.Autonom(0);
 
                 })
 
                 .turn(Math.toRadians(135))
-                .forward(6)
-                .strafeLeft(24*1.4)
+                .forward(8)
+                .strafeLeft(24*1.25)
                 .addTemporalMarker(11,()->{
                     l.Autonom(l.maxRot);
                 })
@@ -64,8 +64,27 @@ public class VenomBlue extends LinearOpMode {
                     i.Autonom(0);
                     l.Autonom(0);
                 })
-                .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(24,12,Math.toRadians(180)))
+                .waitSeconds(5)
+                .addTemporalMarker(18.5,()->{
+                    i.Autonom(1);
+                    p.Take();
+                })
+                .turn(Math.toRadians(-135))
+                .lineTo(new Vector2d(58,34))
+                .lineToLinearHeading(new Pose2d(59-6 ,60+24*1.2-6,Math.toRadians(45)))
+                .addTemporalMarker(22,()->{
+                    l.Autonom(l.maxRot);
+                    p.Score();
+                })
+                .addTemporalMarker(25,()->{
+                    i.Autonom(-1);
+                })
+                .addTemporalMarker(26,()->{
+                    l.Autonom(0);
+                    i.Autonom(0);
+                })
+                .waitSeconds(6)
+                .lineToLinearHeading(new Pose2d(26,24,Math.toRadians(180)))
                 .build();
 
         waitForStart();

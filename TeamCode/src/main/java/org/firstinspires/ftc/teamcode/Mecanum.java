@@ -52,10 +52,7 @@ public Mecanum(LinearOpMode linearOpMode){
                 if(gamepad1.back)
                     operation=!operation;
                 if(operation){
-                    if(Lift.currentRot!=0)
-                         rx = (gamepad1.left_trigger - gamepad1.right_trigger)/Lift.currentRot;
-                    else
-                         rx = (gamepad1.left_trigger - gamepad1.right_trigger);
+                    rx = (gamepad1.left_trigger - gamepad1.right_trigger);
                     double y = gamepad1.left_stick_y; // Remember, Y stick value is reversed
                     double x = -gamepad1.left_stick_x;
                     /*try {

@@ -19,9 +19,45 @@ public class MeepMeepTesting {
                 // Option: Set theme. Default = ColorSchemeRedDark()
                 .setColorScheme(new ColorSchemeRedDark())
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(-1, 60, Math.toRadians(180)))
-                                .turn(Math.toRadians(45))
-                                .forward(45)
+                        drive.trajectorySequenceBuilder(new Pose2d(12, 60, Math.toRadians(-90)))
+                                .forward(15)
+                                .addTemporalMarker(1, () -> {
+                                })
+                                .waitSeconds(0.5)
+                                .addTemporalMarker(1.5, () -> {
+                                })
+                                .back(24)
+                                .strafeLeft(24*2.55)
+                                .addTemporalMarker(2.2, () -> {
+                                    //i.Autonom(-1);
+                                })
+                                .addTemporalMarker(7, () -> {
+
+                                })
+                                .forward(25)
+                                .addTemporalMarker(9,()->{
+
+                                })
+
+                                .turn(Math.toRadians(135))
+                                .forward(6)
+                                .strafeLeft(24*1.4)
+                                .addTemporalMarker(11,()->{
+
+                                })
+                                .addTemporalMarker(15,()->{
+                                })
+                                .addTemporalMarker(16.5,()->{
+
+                                })
+                                .waitSeconds(4)
+                                .addTemporalMarker(20,()->{
+
+                                })
+                                .turn(Math.toRadians(-135))
+                                .lineTo(new Vector2d(58,24))
+                                .lineToLinearHeading(new Pose2d(55,60+24*1.5,Math.toRadians(45)))
+                                //.lineToLinearHeading(new Pose2d(24,12,Math.toRadians(180)))
                                 .build()
                 );
 

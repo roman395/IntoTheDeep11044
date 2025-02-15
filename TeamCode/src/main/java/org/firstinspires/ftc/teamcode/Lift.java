@@ -11,8 +11,8 @@ public class Lift {
     public DcMotorEx motorL;
     public DcMotorEx motorR;
 
-    public final  int maxRot = 3800;
-    public final  int specScoreRot = 1650;
+    public final  int maxRot = 4300;
+    public final  int specScoreRot = 1700;
     public final  int minRot = 0;
     public static int currentRot;
     LinearOpMode linearOpMode;
@@ -39,13 +39,13 @@ public class Lift {
         if (g2.dpad_up) {
             motorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            motorL.setPower(0.5);
-            motorR.setPower(0.5);
+            motorL.setPower(1);
+            motorR.setPower(1);
         } else if(g2.dpad_down) {
             motorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            motorL.setPower(-0.5);
-            motorR.setPower(-0.5);
+            motorL.setPower(-1);
+            motorR.setPower(-1);
         }
         else{
             motorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
