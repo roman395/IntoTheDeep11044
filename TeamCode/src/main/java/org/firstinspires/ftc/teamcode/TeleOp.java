@@ -7,42 +7,34 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp
 public class TeleOp extends LinearOpMode {
-    enum State {
-        Up,
-        Down
-    }
-
-    Gamepad gamepad;
-    Mecanum mecanum;
+    Gamepad g1;
+    Mecanum drive;
     Intake intake;
     Lift lift;
     Perekid perekid;
     ElapsedTime time;
-    State state;
 
     @Override
     public void runOpMode() throws InterruptedException {
-        state = State.Down;
-        mecanum = new Mecanum(this);
+        drive = new Mecanum(this);
         intake = new Intake(this);
         lift = new Lift(this);
         time = new ElapsedTime();
         perekid = new Perekid(this);
-        gamepad = gamepad1;
+        g1 = gamepad1;
         waitForStart();
         while (opModeIsActive()) {
-            Lift.currentRot=lift.motorL.getCurrentPosition();
-            mecanum.TeleOp();
+            Lift.currentRot = lift.motorL.getCurrentPosition();
+            drive.TeleOp();
             intake.Control();
             perekid.Control();
-            if(gamepad.circle && perekid.s1.getPosition()!=0.88){
-                if(perekid.s1.getPosition()>0.88){
-                    perekid.s1.setPosition(perekid.s1.getPosition()-0.01);
-                    perekid.s2.setPosition(perekid.s2.getPosition()-0.01);
-                }
-                else {
-                    perekid.s1.setPosition(perekid.s1.getPosition()+0.01);
-                    perekid.s2.setPosition(perekid.s2.getPosition()+0.01);
+            if (g1.circle && perekid.s1.getPosition() != 0.88) {
+                if (perekid.s1.getPosition() > 0.88) {
+                    perekid.s1.setPosition(perekid.s1.getPosition() - 0.04);
+                    perekid.s2.setPosition(perekid.s2.getPosition() - 0.04);
+                } else {
+                    perekid.s1.setPosition(perekid.s1.getPosition() + 0.04);
+                    perekid.s2.setPosition(perekid.s2.getPosition() + 0.04);
                 }
 
                 //s1.setPosition(0.88);
@@ -51,14 +43,11 @@ public class TeleOp extends LinearOpMode {
             lift.Control();
             telemetry.addData("PositionL", lift.motorL.getCurrentPosition());
             telemetry.addData("PositionR", lift.motorR.getCurrentPosition());
-            telemetry.addData("Mode", mecanum.operation);
-            telemetry.addData("state", state);
+            telemetry.addData("Mode", drive.operation);
             telemetry.addData("motor", lift.motorL.getTargetPosition());
 
             telemetry.update();
         }
-
-
 
 
     }

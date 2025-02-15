@@ -11,9 +11,9 @@ public class Lift {
     public DcMotorEx motorL;
     public DcMotorEx motorR;
 
-    public final  int maxRot = 4300;
-    public final  int specScoreRot = 1700;
-    public final  int minRot = 0;
+    public final int maxRot = 3800;
+    public final int specScoreRot = 1650;
+    public final int minRot = 0;
     public static int currentRot;
     LinearOpMode linearOpMode;
     HardwareMap hardwareMap;
@@ -41,19 +41,18 @@ public class Lift {
             motorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorL.setPower(1);
             motorR.setPower(1);
-        } else if(g2.dpad_down) {
+        } else if (g2.dpad_down) {
             motorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorL.setPower(-1);
             motorR.setPower(-1);
-        }
-        else{
+        } else {
             motorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorL.setPower(0);
             motorR.setPower(0);
         }
-        if(g2.touchpad){
+        if (g2.touchpad) {
             motorR.setTargetPosition(maxRot);
             motorL.setTargetPosition(maxRot);
 
@@ -62,8 +61,7 @@ public class Lift {
             motorR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             motorL.setPower(1);
             motorR.setPower(1);
-        }
-        else if(g2.right_stick_button){
+        } else if (g2.right_stick_button) {
             motorR.setTargetPosition(minRot);
             motorL.setTargetPosition(minRot);
 

@@ -44,8 +44,8 @@ public class Perekid {
         }
     }
     public void Take(){
-        s1.setPosition(0.99);
-        s2.setPosition(0.99);
+        s1.setPosition(0.87);
+        s2.setPosition(0.87);
     }
 
     public void Sub(){
@@ -53,8 +53,8 @@ public class Perekid {
         s2.setPosition(0.88);
     }
     public void Score(){
-        s1.setPosition(0.5);
-        s2.setPosition(0.5);
+        s1.setPosition(0.45);
+        s2.setPosition(0.45);
     }
 
 }
