@@ -44,13 +44,13 @@ public class Perekid {
         }
     }
     public void Take(){
-        s1.setPosition(0.87);
-        s2.setPosition(0.87);
+        s1.setPosition(0.99);
+        s2.setPosition(0.99);
     }
 
     public void Sub(){
-        s1.setPosition(0.88);
-        s2.setPosition(0.88);
+        s1.setPosition(0.5);
+        s2.setPosition(0.5);
     }
     public void Score(){
         s1.setPosition(0.45);

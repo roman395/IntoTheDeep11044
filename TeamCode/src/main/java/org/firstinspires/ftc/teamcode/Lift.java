@@ -11,8 +11,8 @@ public class Lift {
     public DcMotorEx motorL;
     public DcMotorEx motorR;
 
-    public final int maxRot = 3800;
-    public final int specScoreRot = 1650;
+    public final int maxRot = 4000;
+    public final int specScoreRot = 1500;
     public final int minRot = 0;
     public static int currentRot;
     LinearOpMode linearOpMode;

@@ -32,14 +32,18 @@ public class Blue1plus1 extends LinearOpMode {
                 })
                 .waitSeconds(0.5)
                 .addTemporalMarker(1.5, () -> {
+                    intake.Autonom(1);
                     lift.Autonom(0);
                 })
+                //.addTemporalMarker(2,()->{
+                  //  perekid.Sub();
+                //})
                 .back(24)
-                .strafeLeft(24 * 2.35)
+                .strafeLeft(24 * 2.35-6)
                 .addTemporalMarker(1.5, () -> {
                     //i.Autonom(1);
                 })
-                .addTemporalMarker(7, () -> {
+                .addTemporalMarker(6.7, () -> {
                     perekid.Take();
                     intake.Autonom(1);
                 })
@@ -51,8 +55,8 @@ public class Blue1plus1 extends LinearOpMode {
                 })
 
                 .turn(Math.toRadians(135))
-                .forward(8)
-                .strafeLeft(24 * 1.25)
+                .forward(13)
+                .strafeLeft(24 * 1.26)
                 .addTemporalMarker(11, () -> {
                     lift.Autonom(lift.maxRot);
                 })
@@ -64,14 +68,14 @@ public class Blue1plus1 extends LinearOpMode {
                     lift.Autonom(0);
                 })
                 .waitSeconds(4)
-                .lineToLinearHeading(new Pose2d(24, 21, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(22, 21+8, Math.toRadians(180)))
                 .build();
 
         waitForStart();
         drive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         drive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         drive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        drive.setPoseEstimate(new Pose2d(12, 24 * 3, Math.toRadians(-90)));
+        drive.setPoseEstimate(new Pose2d(10, 24 * 3, Math.toRadians(-90)));
         lift.Autonom(lift.specScoreRot);
         perekid.Score();
 
