@@ -15,7 +15,7 @@ public class Perekid {
     HardwareMap hardwareMap;
     Gamepad gamepad1;
 
-    public Perekid(LinearOpMode linearOpMode){
+    public Perekid(LinearOpMode linearOpMode) {
 
     }
 }

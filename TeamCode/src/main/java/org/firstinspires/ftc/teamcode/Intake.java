@@ -9,7 +9,7 @@ public class Intake {
     HardwareMap hardwareMap;
     Gamepad gamepad1;
 
-    public Intake(LinearOpMode linearOpMode){
+    public Intake(LinearOpMode linearOpMode) {
 
     }
 }

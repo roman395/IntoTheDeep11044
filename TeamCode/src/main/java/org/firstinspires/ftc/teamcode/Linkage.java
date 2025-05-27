@@ -12,7 +12,7 @@ public class Linkage {
     HardwareMap hardwareMap;
     Gamepad gamepad1;
 
-    public Linkage(LinearOpMode linearOpMode){
+    public Linkage(LinearOpMode linearOpMode) {
 
     }
 }

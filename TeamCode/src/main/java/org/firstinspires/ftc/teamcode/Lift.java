@@ -14,7 +14,7 @@ public class Lift {
     HardwareMap hardwareMap;
     Gamepad gamepad1;
 
-    public Lift(LinearOpMode linearOpMode){
+    public Lift(LinearOpMode linearOpMode) {
 
     }
 

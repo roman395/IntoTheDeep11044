@@ -14,7 +14,7 @@ public class Claw {
     HardwareMap hardwareMap;
     Gamepad gamepad1;
 
-    public Claw(LinearOpMode linearOpMode){
+    public Claw(LinearOpMode linearOpMode) {
 
     }
 }
