@@ -56,14 +56,7 @@ public class Mecanum {
             rx = (gamepad1.left_trigger - gamepad1.right_trigger);
             double y = gamepad1.left_stick_y; // Remember, Y stick value is reversed
             double x = -gamepad1.left_stick_x;
-                    /*try {
-                        rx = (gamepad1.left_trigger - gamepad1.right_trigger) / Lift.currentRot;
-                    } catch (Exception ignored){}
 
-                     */
-            // This button choice was made so that it is hard to hit on accident,
-            // it can be freely changed based on preference.
-            // The equivalent button is start on Xbox-style controllers.
             if (gamepad1.options) {
                 imu.resetYaw();
             }
