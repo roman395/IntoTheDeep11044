@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-@TeleOp
+
 public class Mecanum {
     public DcMotor FL;
     public DcMotor FR;
@@ -84,8 +84,8 @@ public class Mecanum {
             BR.setPower(backRightPower);
         } else {
             double y = gamepad1.left_stick_y; // Remember, Y stick value is reversed
-            double x = gamepad1.left_stick_x * 1.1; // Counteract imperfect strafing
-            double rx = gamepad1.right_stick_x;
+            double x = gamepad1.left_stick_x; // Counteract imperfect strafing
+            double rx = (gamepad1.left_trigger - gamepad1.right_trigger);
 
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio,
