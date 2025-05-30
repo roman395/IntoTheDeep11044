@@ -6,16 +6,20 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 @Config
-public class Perekid {
+public class Perekid
+{
     public static double takePos;
     public static double parallelPos;
     public static double scorePos;
-
+    
     LinearOpMode linearOpMode;
     HardwareMap hardwareMap;
     Gamepad gamepad1;
-
-    public Perekid(LinearOpMode linearOpMode) {
-
+    
+    public Perekid(LinearOpMode linearOpMode)
+    {
+        this.linearOpMode = linearOpMode;
+        hardwareMap = linearOpMode.hardwareMap;
+        gamepad1 = linearOpMode.gamepad1;
     }
 }
