@@ -26,35 +26,51 @@ public class Lift
         m1 = hardwareMap.get(DcMotor.class, "liftR");
         m2 = hardwareMap.get(DcMotor.class, "liftL");
         
-        m2.setDirection(DcMotorSimple.Direction.REVERSE);
+        m1.setDirection(DcMotorSimple.Direction.REVERSE);
         
     }
     
     public void TeleOp()
     {
-        if (gamepad1.a)
-        {
-            
-            m1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            m2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            
-            m1.setTargetPosition(takePos);
-            m2.setTargetPosition(takePos);
-            
+        if(gamepad1.dpad_up){
+            m1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            m2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             m1.setPower(1);
             m2.setPower(1);
         }
-        else if (gamepad1.b)
-        {
-            m1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            m2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            
-            m1.setTargetPosition(scorePos);
-            m2.setTargetPosition(scorePos);
-            
-            m1.setPower(1);
-            m2.setPower(1);
+        if(gamepad1.dpad_down){
+            m1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            m2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            m1.setPower(-1);
+            m2.setPower(-1);
         }
+        else{
+            m1.setPower(0);
+            m2.setPower(0);
+        }
+//        if (gamepad1.a)
+//        {
+//
+//            m1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//            m2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//            m1.setTargetPosition(takePos);
+//            m2.setTargetPosition(takePos);
+//
+//            m1.setPower(1);
+//            m2.setPower(1);
+//        }
+//        else if (gamepad1.b)
+//        {
+//            m1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//            m2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//            m1.setTargetPosition(scorePos);
+//            m2.setTargetPosition(scorePos);
+//
+//            m1.setPower(1);
+//            m2.setPower(1);
+//        }
     }
     
 }

@@ -19,7 +19,7 @@ public class Mecanum
     public DcMotor BL;
     public DcMotor BR;
     double rx;
-    boolean operation = true;
+    boolean operation = false;
     IMU imu;
     
     LinearOpMode linearOpMode;
@@ -39,14 +39,13 @@ public class Mecanum
         FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        //        FL.setDirection(DcMotorSimple.Direction.REVERSE);
-        //        BR.setDirection(DcMotorSimple.Direction.REVERSE);
-        //        BL.setDirection(DcMotorSimple.Direction.REVERSE);
+        FL.setDirection(DcMotorSimple.Direction.REVERSE);
+        BL.setDirection(DcMotorSimple.Direction.REVERSE);
         imu = hardwareMap.get(IMU.class, "imu");
         // Adjust the orientation parameters to match your robot
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
-                RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD));
+                RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD ));
         // Without this, the REV Hub's orientation is assumed to be logo up / USB forward
         imu.initialize(parameters);
     }
@@ -57,9 +56,9 @@ public class Mecanum
             operation = !operation;
         if (operation)
         {
-            rx = (gamepad1.left_trigger - gamepad1.right_trigger);
-            double y = gamepad1.left_stick_y; // Remember, Y stick value is reversed
-            double x = -gamepad1.left_stick_x;
+            rx = -(gamepad1.left_trigger - gamepad1.right_trigger);
+            double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
+            double x = gamepad1.left_stick_x;
             
             if (gamepad1.options)
             {
@@ -90,9 +89,9 @@ public class Mecanum
         }
         else
         {
-            double y = gamepad1.left_stick_y; // Remember, Y stick value is reversed
+            double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
             double x = gamepad1.left_stick_x; // Counteract imperfect strafing
-            double rx = (gamepad1.left_trigger - gamepad1.right_trigger);
+            double rx = -(gamepad1.left_trigger - gamepad1.right_trigger);
             
             // Denominator is the largest motor power (absolute value) or 1
             // This ensures all the powers maintain the same ratio,
@@ -104,9 +103,9 @@ public class Mecanum
             double backRightPower = (y + x - rx) / denominator;
             
             FL.setPower(frontLeftPower);
-            FR.setPower(backLeftPower);
-            BR.setPower(frontRightPower);
-            BL.setPower(backRightPower);
+            BL.setPower(backLeftPower);
+            FR.setPower(frontRightPower);
+            BR.setPower(backRightPower);
         }
     }
 }
