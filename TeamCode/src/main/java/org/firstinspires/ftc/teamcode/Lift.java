@@ -12,8 +12,8 @@ public class Lift
 {
     public static int takePos;
     public static int scorePos;
-    DcMotor m1;
-    DcMotor m2;
+    DcMotor mR;
+    DcMotor mL;
     LinearOpMode linearOpMode;
     HardwareMap hardwareMap;
     Gamepad gamepad1;
@@ -23,30 +23,30 @@ public class Lift
         this.linearOpMode = linearOpMode;
         hardwareMap = linearOpMode.hardwareMap;
         gamepad1 = linearOpMode.gamepad1;
-        m1 = hardwareMap.get(DcMotor.class, "liftR");
-        m2 = hardwareMap.get(DcMotor.class, "liftL");
+        mR = hardwareMap.get(DcMotor.class, "liftR");
+        mL = hardwareMap.get(DcMotor.class, "liftL");
         
-        m1.setDirection(DcMotorSimple.Direction.REVERSE);
+        mR.setDirection(DcMotorSimple.Direction.REVERSE);
         
     }
     
     public void TeleOp()
     {
         if(gamepad1.dpad_up){
-            m1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            m2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            m1.setPower(1);
-            m2.setPower(1);
+            mR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            mL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //m1.setPower(1);
+            mL.setPower(1);
         }
         if(gamepad1.dpad_down){
-            m1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            m2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            m1.setPower(-1);
-            m2.setPower(-1);
+            mR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            mL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //m1.setPower(-1);
+            mL.setPower(-1);
         }
         else{
-            m1.setPower(0);
-            m2.setPower(0);
+            mR.setPower(0);
+            mL.setPower(0);
         }
 //        if (gamepad1.a)
 //        {

@@ -11,10 +11,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 @Config
 public class Intake
 {
-    public static double takeRot = 0;
-    public static double outRot = 0;
+    public static double takeRot = 0.57;
+    public static double outRot = 0.01;
     private final DcMotor m;
-     final Servo serv;
+    final Servo serv;
     private final ColorSensor s;
     private boolean sthIn;
     
@@ -38,9 +38,9 @@ public class Intake
     
     public boolean GetState() {return sthIn;}
     
-    public void InMode() {m.setPower(1);}
+    public void InMode() {m.setPower(-1);}
     
-    public void OutMode() {m.setPower(-1);}
+    public void OutMode() {m.setPower(1);}
     
     public void OffMode() {m.setPower(0);}
     

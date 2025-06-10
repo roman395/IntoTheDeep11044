@@ -4,14 +4,17 @@ import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @Config
 public class Perekid
 {
     public static double takePos;
-    public static double parallelPos;
+    public static double parallelPos = 0;
     public static double scorePos;
     
+    Servo leftPerekid;
+    Servo rightPerekid;
     LinearOpMode linearOpMode;
     HardwareMap hardwareMap;
     Gamepad gamepad1;
@@ -21,5 +24,12 @@ public class Perekid
         this.linearOpMode = linearOpMode;
         hardwareMap = linearOpMode.hardwareMap;
         gamepad1 = linearOpMode.gamepad1;
+        leftPerekid = hardwareMap.get(Servo.class,"LeftPerekid");
+        rightPerekid = hardwareMap.get(Servo.class,"RightPerekid");
+        leftPerekid.setDirection(Servo.Direction.REVERSE);
+    }
+    public void parallelPos(){
+        leftPerekid.setPosition(parallelPos);
+        rightPerekid.setPosition(parallelPos);
     }
 }

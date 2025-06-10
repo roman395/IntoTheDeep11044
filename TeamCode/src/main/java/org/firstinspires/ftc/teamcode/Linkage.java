@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Linkage
 {
     public static int maxPromotion = 100000000;
-    public static int minPromotion = 0;
+    public static int minPromotion = -10000000;
     
     DcMotor m;
     LinearOpMode linearOpMode;
@@ -32,13 +32,21 @@ public class Linkage
     
     public void Manual()
     {
-        m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         if (-g.right_stick_y > 0.1 && m.getCurrentPosition() < maxPromotion)
+        {
+            m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             m.setPower(-g.right_stick_y);
+            
+        }
         else if (-g.right_stick_y < -0.1 && m.getCurrentPosition() > minPromotion)
+        {
+            m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             m.setPower(-g.right_stick_y);
+        }
         else
+        {
             m.setPower(0);
+        }
     }
     
     public void Promotion()

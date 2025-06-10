@@ -1,11 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-@TeleOp
-public class Teleop extends LinearOpMode
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp
+public class TeleOp extends LinearOpMode
 {
     enum States
     {
@@ -28,43 +27,60 @@ public class Teleop extends LinearOpMode
         g = gamepad1;
         intake = new Intake(this);
         train = new Mecanum(this);
-        //claw = new Claw(this);
-        //lift = new Lift(this);
+        claw = new Claw(this);
+        lift = new Lift(this);
         linkage = new Linkage(this);
-        //perekid = new Perekid(this);
+        perekid = new Perekid(this);
         waitForStart();
         while (opModeIsActive())
         {
+            linkage.Manual();
             train.TeleOp();
             intake.Update();
+            lift.TeleOp();
+            if(g.circle){
+                perekid.parallelPos();
+            }
+            if (g.triangle)
+            {
+                intake.OutRot();
+                s = States.WITHOUT_SAMPLE;
+            }
             switch (s)
             {
                 case WITH_SAMPLE:
-                    linkage.Start();
                     intake.OutRot();
-                    if(!intake.GetState())
+                    if (!intake.GetState())
+                    {
                         intake.OffMode();
-                    
+                    }
+                    else
+                    {
+                        intake.InMode();
+                    }
                     break;
                 case WITHOUT_SAMPLE:
-                    linkage.Manual();
-                    if(g.cross)
+                    if (g.right_bumper)
                     {
                         intake.TakeRot();
                         intake.InMode();
                     }
-                    else if(g.circle){
-                        intake.OffMode();
-                        intake.OutRot();
+                    else if (g.left_bumper)
+                    {
+                        intake.OutMode();
                     }
+                    else
+                        intake.OffMode();
                     
-                    if(intake.GetState())
+                    if (intake.GetState())
+                    {
                         s = States.WITH_SAMPLE;
+                    }
                     break;
             }
             
-            telemetry.addData("linkage", linkage.m.getCurrentPosition());
-            telemetry.addData("Intake Servo", intake.serv.getPosition());
+            telemetry.addData("Left perekid", perekid.leftPerekid.getPosition());
+            telemetry.addData("Right perekid", perekid.rightPerekid.getPosition());
             telemetry.update();
         }
     }

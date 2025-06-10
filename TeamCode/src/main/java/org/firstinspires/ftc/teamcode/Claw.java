@@ -7,11 +7,15 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Claw
 {
-    public Servo s;
+    Servo opener;
+    Servo rotate;
     public static double open;
     public static double close;
-    public static double up;
-    public static double down;
+    public static double take_spec;
+    public static double take_spec_up;
+    public static double score_spec;
+    public static double score_sample;
+    public static double take_sample;
     
     LinearOpMode linearOpMode;
     HardwareMap hardwareMap;
@@ -22,14 +26,20 @@ public class Claw
         this.linearOpMode = linearOpMode;
         hardwareMap = linearOpMode.hardwareMap;
         gamepad1 = linearOpMode.gamepad1;
-        s = hardwareMap.get(Servo.class, "Claw");
+        opener = hardwareMap.get(Servo.class, "Claw");
+        rotate = hardwareMap.get(Servo.class,"ClawAngle");
     }
     
-    public void TeleOp()
+    public void Open_Close()
     {
         if (gamepad1.a)
-            s.setPosition(open);
+            opener.setPosition(open);
         else if (gamepad1.b)
-            s.setPosition(close);
+            opener.setPosition(close);
     }
+    public void TakeSpec(){rotate.setPosition(take_spec);}
+    public void TakeSpecUp(){rotate.setPosition(take_spec_up);}
+    public void ScoreSpec(){rotate.setPosition(score_spec);}
+    public void ScoreSample(){rotate.setPosition(score_sample);}
+    public void TakeSample(){rotate.setPosition(take_sample );}
 }
