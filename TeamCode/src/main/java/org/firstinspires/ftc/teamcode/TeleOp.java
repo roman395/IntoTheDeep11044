@@ -38,7 +38,8 @@ public class TeleOp extends LinearOpMode
             train.TeleOp();
             intake.Update();
             lift.TeleOp();
-            if(g.circle){
+            if (g.circle)
+            {
                 perekid.parallelPos();
             }
             if (g.triangle)
@@ -79,7 +80,7 @@ public class TeleOp extends LinearOpMode
                     break;
             }
             
-            telemetry.addData("Left perekid", perekid.leftPerekid.getPosition());
+            telemetry.addData("Color_perekid:", claw.Color());
             telemetry.addData("Right perekid", perekid.rightPerekid.getPosition());
             telemetry.update();
         }

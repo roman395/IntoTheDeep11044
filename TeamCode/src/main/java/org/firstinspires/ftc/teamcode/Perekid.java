@@ -9,9 +9,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 @Config
 public class Perekid
 {
-    public static double takePos;
-    public static double parallelPos = 0;
-    public static double scorePos;
+    public static double take_spec_pos = 0.97;
+    public static double parallelPos = 0.38;
+    public static double scorePos = 0.64;
+    public static double take_sample_pos = 0.64;
     
     Servo leftPerekid;
     Servo rightPerekid;
@@ -24,11 +25,13 @@ public class Perekid
         this.linearOpMode = linearOpMode;
         hardwareMap = linearOpMode.hardwareMap;
         gamepad1 = linearOpMode.gamepad1;
-        leftPerekid = hardwareMap.get(Servo.class,"LeftPerekid");
-        rightPerekid = hardwareMap.get(Servo.class,"RightPerekid");
+        leftPerekid = hardwareMap.get(Servo.class, "LeftPerekid");
+        rightPerekid = hardwareMap.get(Servo.class, "RightPerekid");
         leftPerekid.setDirection(Servo.Direction.REVERSE);
     }
-    public void parallelPos(){
+    
+    public void parallelPos()
+    {
         leftPerekid.setPosition(parallelPos);
         rightPerekid.setPosition(parallelPos);
     }

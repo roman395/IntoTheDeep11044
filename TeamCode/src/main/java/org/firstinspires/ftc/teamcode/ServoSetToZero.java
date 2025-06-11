@@ -3,27 +3,25 @@ package org.firstinspires.ftc.teamcode;
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.ServoController;
-import com.qualcomm.robotcore.hardware.ServoImplEx;
 
 @Config
-@TeleOp
-public class tests extends LinearOpMode
+@TeleOp(group = "test")
+public class ServoSetToZero extends LinearOpMode
 {
-    public Servo m;
-    public static double imGay;
+    public static String servoConfig = "";
+    public static double pos = 0.5;
     
     @Override
     public void runOpMode() throws InterruptedException
     {
-        m = hardwareMap.get(Servo.class, "IntakeS");
+        Servo s = hardwareMap.get(Servo.class, servoConfig);
         waitForStart();
         while (opModeIsActive())
         {
-            m.setPosition(imGay);
+            s.setPosition(pos);
+            telemetry.addData("servo pose", s.getPosition());
+            telemetry.update();
         }
     }
 }
