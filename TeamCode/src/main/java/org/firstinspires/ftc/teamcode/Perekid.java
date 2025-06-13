@@ -30,9 +30,25 @@ public class Perekid
         leftPerekid.setDirection(Servo.Direction.REVERSE);
     }
     
-    public void parallelPos()
+    public void ParallelPos()
     {
         leftPerekid.setPosition(parallelPos);
         rightPerekid.setPosition(parallelPos);
     }
+    public void Take_Spec_Pose()
+    {
+        leftPerekid.setPosition(take_spec_pos);
+        rightPerekid.setPosition(take_spec_pos);
+    }
+    public void Score_Pose()
+    {
+        leftPerekid.setPosition(scorePos);
+        rightPerekid.setPosition(scorePos);
+    }
+    public void Take_Sample_Pose()
+    {
+        leftPerekid.setPosition(take_sample_pos);
+        rightPerekid.setPosition(take_sample_pos);
+    }
+    
 }

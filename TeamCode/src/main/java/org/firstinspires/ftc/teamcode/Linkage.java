@@ -13,8 +13,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @Config
 public class Linkage
 {
-    public static int maxPromotion = 100000000;
-    public static int minPromotion = -10000000;
+    public static int maxPromotion = 270;
+    public static int minPromotion = -50;
     
     DcMotor m;
     LinearOpMode linearOpMode;
@@ -44,17 +44,20 @@ public class Linkage
         timer = new ElapsedTime();
     }
     
-    public void Manual()
+    public void TeleOp()
     {
-        if (g.right_stick_y != 0)
+        if(g.dpad_left)
+            maxPromotion-=100;
+        else if(g.dpad_right)
+            maxPromotion+=100;
+        
+        if (g.right_stick_y >= 0.1||g.right_stick_y<=-0.1 && m.getCurrentPosition()<maxPromotion && m .getCurrentPosition()>minPromotion)
         {
             m.setPower(-g.right_stick_y);
-            targetPos = m.getTargetPosition();
+            targetPos = m.getCurrentPosition();
         }
-        else
-        {
-            PIDController();
-        }
+        linearOpMode.telemetry.addData("curentPos",m.getCurrentPosition());
+        linearOpMode.telemetry.addData("targetPos",targetPos);
     }
     
     public void Promotion()

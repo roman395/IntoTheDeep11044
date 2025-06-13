@@ -8,8 +8,12 @@ public class TeleOp extends LinearOpMode
 {
     enum States
     {
-        WITHOUT_SAMPLE,
-        WITH_SAMPLE
+        TAKE_WITHOUT_SAMPLE,
+        TAKE_WITH_SAMPLE,
+        BROADCAST,
+        BASKET,
+        RESET,
+        RUNG
     }
     
     Intake intake;
@@ -19,11 +23,12 @@ public class TeleOp extends LinearOpMode
     Linkage linkage;
     Perekid perekid;
     Gamepad g;
+    boolean inputAfterTake = false;
     
     @Override
     public void runOpMode() throws InterruptedException
     {
-        States s = States.WITHOUT_SAMPLE;
+        States s = States.TAKE_WITHOUT_SAMPLE;
         g = gamepad1;
         intake = new Intake(this);
         train = new Mecanum(this);
@@ -34,55 +39,86 @@ public class TeleOp extends LinearOpMode
         waitForStart();
         while (opModeIsActive())
         {
-            linkage.Manual();
             train.TeleOp();
-            intake.Update();
-            lift.TeleOp();
-            if (g.circle)
+            linkage.TeleOp();
+            if (g.right_bumper)
             {
-                perekid.parallelPos();
+                intake.InMode();
+                intake.TakeRot();
             }
-            if (g.triangle)
-            {
+            else if (g.left_bumper)
+                intake.OutMode();
+            else
+                intake.OffMode();
+            if (g.options)
                 intake.OutRot();
-                s = States.WITHOUT_SAMPLE;
-            }
             switch (s)
             {
-                case WITH_SAMPLE:
-                    intake.OutRot();
-                    if (!intake.GetState())
-                    {
-                        intake.OffMode();
-                    }
-                    else
-                    {
-                        intake.InMode();
-                    }
-                    break;
-                case WITHOUT_SAMPLE:
-                    if (g.right_bumper)
-                    {
-                        intake.TakeRot();
-                        intake.InMode();
-                    }
-                    else if (g.left_bumper)
-                    {
-                        intake.OutMode();
-                    }
-                    else
-                        intake.OffMode();
-                    
+                case TAKE_WITHOUT_SAMPLE:
                     if (intake.GetState())
                     {
-                        s = States.WITH_SAMPLE;
+                        s = States.TAKE_WITH_SAMPLE;
+                        intake.OutRot();
+                    }
+                    break;
+                case TAKE_WITH_SAMPLE:
+                    if (g.right_bumper)
+                        inputAfterTake = true;
+                    if (inputAfterTake)
+                        if (intake.GetState())
+                            intake.OutMode();
+                        else
+                        {
+                            s = States.BROADCAST;
+                            inputAfterTake = false;
+                        }
+                    else if (!intake.GetState())
+                        s = States.RUNG;
+                    break;
+                case BROADCAST:
+                    lift.TakeSample();
+                    perekid.Take_Sample_Pose();
+                    claw.TakeSample();
+                    claw.Open();
+                    if (claw.Color() == Claw.requirement_number_for_sensor)
+                    {
+                        claw.Close();
+                        s = States.BASKET;
+                    }
+                    break;
+                case BASKET:
+                    lift.ScoreSample();
+                    claw.ScoreSpec();
+                    perekid.Score_Pose();
+                    if (g.triangle)
+                    {
+                        claw.Open();
+                        s = States.RESET;
+                    }
+                    break;
+                case RESET:
+                    if (g.triangle)
+                    {
+                        perekid.Take_Sample_Pose();
+                        claw.TakeSample();
+                        lift.TakeSample();
+                        s = States.TAKE_WITHOUT_SAMPLE;
+                    }
+                    break;
+                case RUNG:
+                    perekid.ParallelPos();
+                    claw.ScoreSpec();
+                    lift.ScoreSpec();
+                    if(g.triangle){
+                        claw.Open();
+                        s = States.RESET;
                     }
                     break;
             }
-            
-            telemetry.addData("Color_perekid:", claw.Color());
-            telemetry.addData("Right perekid", perekid.rightPerekid.getPosition());
+            linkage.PIDController();
+            telemetry.addData("State", s);
             telemetry.update();
+            
         }
     }
 }

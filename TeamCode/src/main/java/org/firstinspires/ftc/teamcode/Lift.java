@@ -10,8 +10,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 @Config
 public class Lift
 {
-    public static int takePos;
-    public static int scorePos;
+    public static int take_Pos;
+    public static int score_sample_pos;
+    public static int score_spec_pos;
     DcMotor mR;
     DcMotor mL;
     LinearOpMode linearOpMode;
@@ -25,18 +26,45 @@ public class Lift
         gamepad1 = linearOpMode.gamepad1;
         mR = hardwareMap.get(DcMotor.class, "liftR");
         mL = hardwareMap.get(DcMotor.class, "liftL");
-        
         mR.setDirection(DcMotorSimple.Direction.REVERSE);
-        
     }
-    
+    public void TakeSample(){
+        mL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        mR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        
+        mL.setTargetPosition(take_Pos);
+        mR.setTargetPosition(take_Pos);
+        
+        mL.setPower(1);
+        mR.setPower(1);
+    }
+    public void ScoreSample(){
+        mL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        mR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        
+        mL.setTargetPosition(score_sample_pos);
+        mR.setTargetPosition(score_sample_pos);
+        
+        mL.setPower(1);
+        mR.setPower(1);
+    }
+    public void ScoreSpec(){
+        mL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        mR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        
+        mL.setTargetPosition(score_spec_pos);
+        mR.setTargetPosition(score_spec_pos);
+        
+        mL.setPower(1);
+        mR.setPower(1);
+    }
     public void TeleOp()
     {
         if (gamepad1.dpad_up)
         {
             mR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             mL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            //m1.setPower(1);
+            mR.setPower(1);
             mL.setPower(1);
         }
         if (gamepad1.dpad_down)
@@ -51,29 +79,6 @@ public class Lift
             mR.setPower(0);
             mL.setPower(0);
         }
-        //        if (gamepad1.a)
-        //        {
-        //
-        //            m1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        //            m2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        //
-        //            m1.setTargetPosition(takePos);
-        //            m2.setTargetPosition(takePos);
-        //
-        //            m1.setPower(1);
-        //            m2.setPower(1);
-        //        }
-        //        else if (gamepad1.b)
-        //        {
-        //            m1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        //            m2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        //
-        //            m1.setTargetPosition(scorePos);
-        //            m2.setTargetPosition(scorePos);
-        //
-        //            m1.setPower(1);
-        //            m2.setPower(1);
-        //        }
     }
     
 }

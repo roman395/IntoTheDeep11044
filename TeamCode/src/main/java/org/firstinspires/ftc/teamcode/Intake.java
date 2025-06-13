@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 @Config
 public class Intake
 {
-    public static double takeRot = 0.57;
+    public static double takeRot = 0.55;
     public static double outRot = 0.01;
     private final DcMotor m;
     final Servo serv;

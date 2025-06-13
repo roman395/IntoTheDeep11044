@@ -10,7 +10,8 @@ public class Claw
 {
     Servo opener;
     Servo rotate;
-    public static double open = 1;
+    public static double requirement_number_for_sensor = 1024;
+    public static double open = 1; ;
     public static double close = 0.8;
     public static double take_spec = 0.55;
     public static double take_spec_up = 0.65;
@@ -30,16 +31,12 @@ public class Claw
         gamepad1 = linearOpMode.gamepad1;
         opener = hardwareMap.get(Servo.class, "Claw");
         rotate = hardwareMap.get(Servo.class, "ClawAngle");
-        sensor = hardwareMap.get(AnalogSensor.class, "clawSensor");
+        //sensor = hardwareMap.get(AnalogSensor.class, "ClawSensor");
     }
     
-    public void Open_Close()
-    {
-        if (gamepad1.a)
-            opener.setPosition(open);
-        else if (gamepad1.b)
-            opener.setPosition(close);
-    }
+    public void Open(){opener.setPosition(open);}
+    
+    public void Close(){opener.setPosition(close);}
     
     public double Color() {return sensor.readRawVoltage();}
     
