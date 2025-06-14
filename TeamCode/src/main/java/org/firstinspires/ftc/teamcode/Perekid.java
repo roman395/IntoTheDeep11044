@@ -12,8 +12,8 @@ public class Perekid
     public static double take_spec_pos = 0.97;
     public static double parallelPos = 0.38;
     public static double scorePos = 0.64;
-    public static double take_sample_pos = 0.64;
-    
+    public static double take_sample_pos = 0.1;
+    public boolean done =false;
     Servo leftPerekid;
     Servo rightPerekid;
     LinearOpMode linearOpMode;
@@ -34,17 +34,21 @@ public class Perekid
     {
         leftPerekid.setPosition(parallelPos);
         rightPerekid.setPosition(parallelPos);
+        
     }
+    
     public void Take_Spec_Pose()
     {
         leftPerekid.setPosition(take_spec_pos);
         rightPerekid.setPosition(take_spec_pos);
     }
+    
     public void Score_Pose()
     {
         leftPerekid.setPosition(scorePos);
         rightPerekid.setPosition(scorePos);
     }
+    
     public void Take_Sample_Pose()
     {
         leftPerekid.setPosition(take_sample_pos);

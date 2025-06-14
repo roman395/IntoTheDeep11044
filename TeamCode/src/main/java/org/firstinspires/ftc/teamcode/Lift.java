@@ -6,7 +6,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
+//TODO set positions and check motor
 @Config
 public class Lift
 {
@@ -18,6 +21,7 @@ public class Lift
     LinearOpMode linearOpMode;
     HardwareMap hardwareMap;
     Gamepad gamepad1;
+    ElapsedTime timer;
     
     public Lift(LinearOpMode linearOpMode)
     {
@@ -27,8 +31,12 @@ public class Lift
         mR = hardwareMap.get(DcMotor.class, "liftR");
         mL = hardwareMap.get(DcMotor.class, "liftL");
         mR.setDirection(DcMotorSimple.Direction.REVERSE);
+        timer = new ElapsedTime();
+        timer.reset();
     }
-    public void TakeSample(){
+    
+    public void TakeSample()
+    {
         mL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         mR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         
@@ -38,7 +46,9 @@ public class Lift
         mL.setPower(1);
         mR.setPower(1);
     }
-    public void ScoreSample(){
+    
+    public void ScoreSample()
+    {
         mL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         mR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         
@@ -48,7 +58,9 @@ public class Lift
         mL.setPower(1);
         mR.setPower(1);
     }
-    public void ScoreSpec(){
+    
+    public void ScoreSpec()
+    {
         mL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         mR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         
@@ -58,16 +70,17 @@ public class Lift
         mL.setPower(1);
         mR.setPower(1);
     }
+    
     public void TeleOp()
     {
-        if (gamepad1.dpad_up)
+        if (gamepad1.dpad_down)
         {
             mR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             mL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             mR.setPower(1);
             mL.setPower(1);
         }
-        if (gamepad1.dpad_down)
+        if (gamepad1.dpad_up)
         {
             mR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             mL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -81,4 +94,25 @@ public class Lift
         }
     }
     
+    double integralSum = 0;
+    double out;
+    double lastError = 0;
+    public static PIDFCoefficients cof = new PIDFCoefficients(0.01, 0, 1e-5, 0);
+    
+    public double PIDController(DcMotor m)
+    {
+        int targetPos = m.getTargetPosition();
+        int position = m.getCurrentPosition();
+        double error = targetPos - position;
+        
+        double derivative = (error - lastError) / timer.seconds();
+        integralSum += error * timer.seconds();
+        out = (cof.p * error) + (cof.i * integralSum) + (cof.d * derivative) + cof.f;
+        m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        m.setPower(out);
+        
+        lastError = error;
+        timer.reset();
+        return error;
+    }
 }

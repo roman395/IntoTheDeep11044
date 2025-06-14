@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp
-public class TeleOp extends LinearOpMode
+public class TeleOpRed extends LinearOpMode
 {
     enum States
     {
@@ -41,6 +41,7 @@ public class TeleOp extends LinearOpMode
         {
             train.TeleOp();
             linkage.TeleOp();
+            intake.RedUpdate();
             if (g.right_bumper)
             {
                 intake.InMode();
@@ -109,7 +110,8 @@ public class TeleOp extends LinearOpMode
                     perekid.ParallelPos();
                     claw.ScoreSpec();
                     lift.ScoreSpec();
-                    if(g.triangle){
+                    if (g.triangle)
+                    {
                         claw.Open();
                         s = States.RESET;
                     }

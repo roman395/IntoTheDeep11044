@@ -14,12 +14,13 @@ public class Intake
     public static double takeRot = 0.55;
     public static double outRot = 0.01;
     private final DcMotor m;
-    final Servo serv;
-    private final ColorSensor s;
+    Servo serv;
+    ColorSensor s;
     private boolean sthIn;
-    
+    LinearOpMode opmode;
     public Intake(LinearOpMode linearOpMode)
     {
+        opmode=linearOpMode;
         HardwareMap hardwareMap = linearOpMode.hardwareMap;
         m = hardwareMap.get(DcMotor.class, "Intake");
         s = hardwareMap.get(ColorSensor.class, "sensor");
@@ -27,13 +28,20 @@ public class Intake
         
     }
     
-    public void Update()
+    public void BlueUpdate()
+    {
+        //blue alliance
+        
+        sthIn = (s.blue() > s.red() && s.alpha() > 44) || (s.green() > s.red() && s.green() > s.blue() && s.alpha() > 44 && s.green() > 100);
+        opmode.telemetry.addLine("Working");
+        
+    }
+    
+    public void RedUpdate()
     {
         //red alliance
-        //sthIn = (s.red() >= s.blue() && s.alpha() > 36) || (s.green() >= s.red() && s.green() >= s.blue() && s.alpha() > 36);
-        //blue alliance
-        sthIn = (s.blue() > s.red() && s.alpha() > 36) || (s.green() > s.red() && s.green() > s.blue()
-                && s.alpha() > 36 && s.green() > 100);
+        if(serv.getPosition()==takeRot||serv.getPosition()==outRot)
+            sthIn = (s.red() >= s.blue() && s.alpha() > 44) || (s.green() >= s.red() && s.green() >= s.blue() && s.alpha() > 44);
     }
     
     public boolean GetState() {return sthIn;}

@@ -13,17 +13,9 @@ import com.qualcomm.robotcore.hardware.ServoImplEx;
 @TeleOp
 public class tests extends LinearOpMode
 {
-    public Servo m;
-    public static double imGay;
     
     @Override
     public void runOpMode() throws InterruptedException
     {
-        m = hardwareMap.get(Servo.class, "IntakeS");
-        waitForStart();
-        while (opModeIsActive())
-        {
-            m.setPosition(imGay);
-        }
     }
 }

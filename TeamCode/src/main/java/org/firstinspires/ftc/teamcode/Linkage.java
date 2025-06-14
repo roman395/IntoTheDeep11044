@@ -13,20 +13,21 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @Config
 public class Linkage
 {
-    public static int maxPromotion = 270;
-    public static int minPromotion = -50;
+    public static int maxPromotion = 190;
+    public static int minPromotion = 0;
+    public static int broadcast_promotion = 37;
     
     DcMotor m;
     LinearOpMode linearOpMode;
     HardwareMap hardwareMap;
     Gamepad g;
-    public static PIDFCoefficients cof = new PIDFCoefficients(0, 0, 0, 0);
+    public static PIDFCoefficients cof = new PIDFCoefficients(0.01, 0, 1e-5, 0);
     
     double targetPos = 0;
     double lastError = 0;
     double integralSum = 0;
     double out;
-    
+    public boolean done = false;
     ElapsedTime timer;
     
     public Linkage(LinearOpMode linearOpMode)
@@ -42,29 +43,40 @@ public class Linkage
         m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         
         timer = new ElapsedTime();
+        timer.reset();
     }
     
     public void TeleOp()
     {
-        if(g.dpad_left)
-            maxPromotion-=100;
-        else if(g.dpad_right)
-            maxPromotion+=100;
+        if (g.dpad_left)
+            maxPromotion -= 10;
+        else if (g.dpad_right)
+            maxPromotion += 100;
         
-        if (g.right_stick_y >= 0.1||g.right_stick_y<=-0.1 && m.getCurrentPosition()<maxPromotion && m .getCurrentPosition()>minPromotion)
+        if (-g.right_stick_y > 0 && m.getCurrentPosition() < maxPromotion)
         {
             m.setPower(-g.right_stick_y);
+        }
+        else if (-g.right_stick_y < 0 && m.getCurrentPosition() > minPromotion)
+        {
+            m.setPower(-g.right_stick_y);
+        }
+        if(-g.right_stick_y>=0.1||-g.right_stick_y<=-0.1){
             targetPos = m.getCurrentPosition();
         }
-        linearOpMode.telemetry.addData("curentPos",m.getCurrentPosition());
-        linearOpMode.telemetry.addData("targetPos",targetPos);
+        
+        
+        
+        linearOpMode.telemetry.addData("currentPos", m.getCurrentPosition());
+        linearOpMode.telemetry.addData("targetPos", targetPos);
     }
     
-    public void Promotion()
+    public void BroadCast()
     {
-        m.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        m.setTargetPosition(maxPromotion);
-        m.setPower(1);
+        targetPos = broadcast_promotion;
+        
+        if(error<3 && targetPos==m.getCurrentPosition())
+            done = true;
     }
     
     public void Start()
@@ -74,10 +86,11 @@ public class Linkage
         m.setPower(1);
     }
     
+    double error = 0;
     public double PIDController()
     {
         int position = m.getCurrentPosition();
-        double error = targetPos - position;
+        error = targetPos - position;
         
         double derivative = (error - lastError) / timer.seconds();
         integralSum += error * timer.seconds();
