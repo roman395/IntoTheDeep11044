@@ -27,7 +27,7 @@ public class Linkage
     double lastError = 0;
     double integralSum = 0;
     double out;
-    public boolean done = false;
+    private boolean done = false;
     ElapsedTime timer;
     
     public Linkage(LinearOpMode linearOpMode)
@@ -70,7 +70,8 @@ public class Linkage
         linearOpMode.telemetry.addData("currentPos", m.getCurrentPosition());
         linearOpMode.telemetry.addData("targetPos", targetPos);
     }
-    
+    public boolean getState(){return done;}
+    public void resetState(){done=false;}
     public void BroadCast()
     {
         targetPos = broadcast_promotion;
@@ -78,14 +79,7 @@ public class Linkage
         if(error<3 && targetPos==m.getCurrentPosition())
             done = true;
     }
-    
-    public void Start()
-    {
-        m.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        m.setTargetPosition(minPromotion);
-        m.setPower(1);
-    }
-    
+    public int getPosition(){return m.getCurrentPosition();}
     double error = 0;
     public double PIDController()
     {

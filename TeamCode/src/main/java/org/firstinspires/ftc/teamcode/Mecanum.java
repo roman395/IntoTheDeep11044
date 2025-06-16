@@ -14,10 +14,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class Mecanum
 {
-    public DcMotor FL;
-    public DcMotor FR;
-    public DcMotor BL;
-    public DcMotor BR;
+    DcMotor FL;
+    DcMotor FR;
+    DcMotor BL;
+    DcMotor BR;
     double rx;
     boolean operation = false;
     IMU imu;

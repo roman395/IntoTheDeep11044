@@ -18,19 +18,18 @@ public class Claw
     Servo rotate;
     public static double requirement_number_for_sensor = 1024;
     public static double open = 1;
-    
     public static double close = 0.8;
     public static double take_spec = 0.55;
     public static double take_spec_up = 0.65;
     public static double score_spec = 0.735;
     public static double score_sample = 0.2;
     public static double take_sample = 0.58;
-    
+
     LinearOpMode linearOpMode;
     HardwareMap hardwareMap;
     Gamepad gamepad1;
     AnalogInput sensor;
-    
+
     public Claw(LinearOpMode linearOpMode)
     {
         this.linearOpMode = linearOpMode;
@@ -39,21 +38,46 @@ public class Claw
         opener = hardwareMap.get(Servo.class, "Claw");
         rotate = hardwareMap.get(Servo.class, "ClawAngle");
         sensor = hardwareMap.get(AnalogInput.class, "ClawSensor");
-        
+
     }
-    public void Open() {opener.setPosition(open);}
-    
-    public void Close() {opener.setPosition(close);}
-    
-    public double Color() {return sensor.getVoltage();}
-    
-    public void TakeSpec() {rotate.setPosition(take_spec);}
-    
-    public void TakeSpecUp() {rotate.setPosition(take_spec_up);}
-    
-    public void ScoreSpec() {rotate.setPosition(score_spec);}
-    
-    public void ScoreSample() {rotate.setPosition(score_sample);}
-    
-    public void TakeSample() {rotate.setPosition(take_sample);}
+
+    public void Open()
+    {
+        opener.setPosition(open);
+    }
+
+    public void Close()
+    {
+        opener.setPosition(close);
+    }
+
+    public double GetState()
+    {
+        return sensor.getVoltage();
+    }
+
+    public void TakeSpec()
+    {
+        rotate.setPosition(take_spec);
+    }
+
+    public void TakeSpecUp()
+    {
+        rotate.setPosition(take_spec_up);
+    }
+
+    public void ScoreSpec()
+    {
+        rotate.setPosition(score_spec);
+    }
+
+    public void ScoreSample()
+    {
+        rotate.setPosition(score_sample);
+    }
+
+    public void TakeSample()
+    {
+        rotate.setPosition(take_sample);
+    }
 }
