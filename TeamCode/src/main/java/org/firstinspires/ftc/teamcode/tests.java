@@ -13,9 +13,9 @@ import com.qualcomm.robotcore.hardware.ServoImplEx;
 @TeleOp
 public class tests extends LinearOpMode
 {
-    
-    @Override
-    public void runOpMode() throws InterruptedException
-    {
-    }
+
+  @Override
+  public void runOpMode() throws InterruptedException
+  {
+  }
 }

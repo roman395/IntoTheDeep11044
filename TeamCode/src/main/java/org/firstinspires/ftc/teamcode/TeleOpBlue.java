@@ -114,7 +114,6 @@ public class TeleOpBlue extends LinearOpMode
 
           break;
         case BASKET:
-          //lift.ScoreSample();
           claw.ScoreSpec();
           perekid.Score_Pose();
           if (g.triangle)
@@ -130,7 +129,6 @@ public class TeleOpBlue extends LinearOpMode
             perekid.ParallelPos();
             claw.ScoreSpec();
             claw.Open();
-            //  lift.TakeSample();
             s = States.TAKE_WITHOUT_SAMPLE;
           }
           break;
@@ -138,7 +136,6 @@ public class TeleOpBlue extends LinearOpMode
           perekid.ParallelPos();
           intake.OffMode();
           claw.ScoreSpec();
-          // lift.ScoreSpec();
           if (g.triangle)
           {
             claw.Open();

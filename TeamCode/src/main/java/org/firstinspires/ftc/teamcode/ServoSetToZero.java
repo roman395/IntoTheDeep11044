@@ -9,19 +9,19 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(group = "test")
 public class ServoSetToZero extends LinearOpMode
 {
-    public static String servoConfig = "";
-    public static double pos = 0.5;
-    
-    @Override
-    public void runOpMode() throws InterruptedException
+  public static String servoConfig = "";
+  public static double pos = 0.5;
+
+  @Override
+  public void runOpMode() throws InterruptedException
+  {
+    Servo s = hardwareMap.get(Servo.class, servoConfig);
+    waitForStart();
+    while (opModeIsActive())
     {
-        Servo s = hardwareMap.get(Servo.class, servoConfig);
-        waitForStart();
-        while (opModeIsActive())
-        {
-            s.setPosition(pos);
-            telemetry.addData("servo pose", s.getPosition());
-            telemetry.update();
-        }
+      s.setPosition(pos);
+      telemetry.addData("servo pose", s.getPosition());
+      telemetry.update();
     }
+  }
 }
